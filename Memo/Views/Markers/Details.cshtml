@@ -1,0 +1,19 @@
+﻿@model Memo.Models.MemoMarker
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@Model.Name</h3>
+    </div>
+    <div class="panel-body">
+        <p>@Model.Description</p>
+        <p>Created: @Model.Created.ToString("g")</p>
+        <div>
+            <h4>Find nearest places:</h4>
+            <div class="input-group">
+                <input type="number" id="distance-input" class="form-control" placeholder="distance" aria-describedby="distance">
+                <span class="input-group-addon">km</span>
+            </div>
+            <button class="btn" onclick="find()">Find</button>
+        </div>
+    </div>
+</div>

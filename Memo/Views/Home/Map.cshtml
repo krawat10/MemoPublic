@@ -1,0 +1,75 @@
+﻿@using Memo.Controllers
+@{
+    ViewData["Title"] = "Map and makers";
+}
+
+@section scripts
+{
+    <script src="~/js/maps.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHmxd8JjWdXXBxTHiASWiS6J-RctgiqEc&libraries=geometry&callback=initUserMap"></script>
+}
+
+@section styles
+{
+    <style>
+        #map {
+            height: 400px; /* The height is 400 pixels */
+        }
+    </style>
+}
+
+<div>
+    <h2>@ViewData["Title"]</h2>
+    <h3>@ViewData["Message"]</h3>
+</div>
+
+<div class="col-md-4">
+    <div class="row">
+        <div class="row" id="marker-details"></div>
+        <br />
+        <div class="row">
+            <form asp-route-returnurl="@Context.Request.Path" asp-controller="MarkersApi" asp-action="Post" method="post">
+                <h4>New Point:</h4>
+                <div class="input-group">
+                    <span class="input-group-addon" id="name-input">Name:</span>
+                    <input type="text"
+                           name="Name"
+                           class="form-control"
+                           placeholder="eg. Flower Shop"
+                           aria-describedby="name-input">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="description-input">Description:</span>
+                    <input type="text"
+                           name="Description"
+                           class="form-control"
+                           placeholder="Describe your place..."
+                           aria-describedby="description-input">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="x-input-span">X</span>
+                    <input type="text"
+                           name="Coordinates.Latitude"
+                           readonly
+                           class="form-control"
+                           id="x-input"
+                           aria-describedby="x-input-span">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="y-input-span">Y</span>
+                    <input type="text"
+                           name="Coordinates.Longitude"
+                           readonly
+                           class="form-control"
+                           id="y-input"
+                           aria-describedby="y-input-span">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-1"></div>
+<div class="col-md-7" id="map"></div>
+<div>@await Component.InvokeAsync("MarkerTableComponent")</div>
+<br/>

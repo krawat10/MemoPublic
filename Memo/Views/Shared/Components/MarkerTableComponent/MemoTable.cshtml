@@ -1,0 +1,41 @@
+﻿@model IQueryable<Memo.Models.MemoMarker>
+
+@if (Model == null)
+{
+    <p>No markers yet</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Created</th>
+        </tr>
+        </thead>
+        @foreach (var marker in Model)
+        {
+            <tr id="marker_@Math.Round(marker.Coordinates.Longitude, 5).ToString("##.00000")_@Math.Round(marker.Coordinates.Latitude, 5).ToString("##.00000")">
+                <td>@marker.Name</td>
+                <td>@marker.Description</td>
+                <td>@marker.Coordinates.Longitude</td>
+                <td>@marker.Coordinates.Latitude</td>
+                <td>@marker.Created</td>
+                @if (marker.Shared)
+                {
+                    <td>@Html.ActionLink("Stop sharing", "SetPrivate", "Markers", new {id = marker.Id})</td>
+                }
+                else
+                {
+                    <td>@Html.ActionLink("Share", "SetPublic", "Markers", new {id = marker.Id})</td>
+                }
+
+                <td>@Html.ActionLink("Delete", "Delete", "Markers", new {id = marker.Id})</td>
+                <td>@Html.ActionLink("Set as center", "SetAsCenter", "Markers", new {id = marker.Id})</td>
+            </tr>
+        }
+    </table>
+}

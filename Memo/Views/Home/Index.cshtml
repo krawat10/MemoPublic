@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section styles
+{
+    <style>
+        #map {
+            height: 400px; /* The height is 400 pixels */
+        }
+    </style>
+}
+@section scripts{
+
+    <script src="~/js/Maps.js">
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHmxd8JjWdXXBxTHiASWiS6J-RctgiqEc&libraries=geometry&callback=initSharedMap">
+    </script>
+}
+<div>
+    <br />
+    <div id="map"></div>
+</div>
+
